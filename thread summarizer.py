@@ -1,21 +1,24 @@
 import json
 import os
 import tweepy
-import requests
 from typing import List, Dict
+import google.generativeai as genai
 
 # Environment variables
 TWITTER_API_KEY = os.environ['TWITTER_API_KEY']
 TWITTER_API_SECRET = os.environ['TWITTER_API_SECRET']
 TWITTER_ACCESS_TOKEN = os.environ['TWITTER_ACCESS_TOKEN']
 TWITTER_ACCESS_TOKEN_SECRET = os.environ['TWITTER_ACCESS_TOKEN_SECRET']
-AI_SUMMARIZATION_API_KEY = os.environ['AI_SUMMARIZATION_API_KEY']
-AI_SUMMARIZATION_API_URL = os.environ['AI_SUMMARIZATION_API_URL']
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 # Twitter API setup
 auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET)
 auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
 twitter_api = tweepy.API(auth)
+
+# Gemini API setup
+genai.configure(api_key=GOOGLE_API_KEY)
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 def get_thread_tweets(tweet_id: str) -> List[str]:
     """Fetch all tweets in a thread given the last tweet's ID."""
@@ -28,20 +31,10 @@ def get_thread_tweets(tweet_id: str) -> List[str]:
     return list(reversed(tweets))
 
 def summarize_text(text: str) -> str:
-    """Use AI tool to summarize the given text."""
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {AI_SUMMARIZATION_API_KEY}'
-    }
-    data = {
-        'text': text,
-        'max_length': 100  # Adjust as needed
-    }
-    response = requests.post(AI_SUMMARIZATION_API_URL, headers=headers, json=data)
-    if response.status_code == 200:
-        return response.json()['summary']
-    else:
-        raise Exception(f"Error in AI summarization: {response.text}")
+    """Use Gemini to summarize the given text."""
+    prompt = f"Summarize the following Twitter thread in a concise paragraph:\n\n{text}"
+    response = model.generate_content(prompt)
+    return response.text
 
 def lambda_handler(event: Dict, context: Dict) -> Dict:
     """Main Lambda function handler."""
@@ -58,7 +51,7 @@ def lambda_handler(event: Dict, context: Dict) -> Dict:
         # Combine tweets into a single text
         full_text = ' '.join(tweets)
         
-        # Summarize the text
+        # Summarize the text using Gemini
         summary = summarize_text(full_text)
         
         return {
