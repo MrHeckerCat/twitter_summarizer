@@ -1,7 +1,7 @@
 import json
 import os
 import requests
-from typing import Dict
+from typing import Dict, List
 import google.generativeai as genai
 import logging
 
@@ -15,8 +15,22 @@ GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-def get_tweet_text(tweet_id: str) -> str:
-    """Fetch tweet text using RapidAPI."""
+def extract_full_texts(data: Dict) -> List[str]:
+    """Recursively extract all 'full_text' values from the response."""
+    texts = []
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key == 'full_text':
+                texts.append(value)
+            elif isinstance(value, (dict, list)):
+                texts.extend(extract_full_texts(value))
+    elif isinstance(data, list):
+        for item in data:
+            texts.extend(extract_full_texts(item))
+    return texts
+
+def get_tweet_texts(tweet_id: str) -> str:
+    """Fetch tweet texts using RapidAPI."""
     url = "https://twitter-api47.p.rapidapi.com/v2/tweet/details"
     querystring = {"tweetId": tweet_id}
     headers = {
@@ -30,23 +44,18 @@ def get_tweet_text(tweet_id: str) -> str:
         data = response.json()
         logger.info(f"Successfully fetched tweet: {tweet_id}")
         
-        # Log the entire response for debugging
-        logger.info(f"Full API response: {json.dumps(data, indent=2)}")
+        # Extract all full_text values
+        all_texts = extract_full_texts(data)
         
-        # Try multiple possible locations for the tweet text
-        tweet_text = (
-            data.get('data', {}).get('core', {}).get('user_results', {}).get('result', {}).get('legacy', {}).get('full_text') or
-            data.get('data', {}).get('legacy', {}).get('full_text') or
-            data.get('data', {}).get('text') or
-            ''
-        )
+        if not all_texts:
+            logger.warning(f"Could not find any tweet texts for tweet {tweet_id}")
+            return ''
         
-        if not tweet_text:
-            logger.warning(f"Could not find tweet text for tweet {tweet_id}")
-        else:
-            logger.info(f"Found tweet text: {tweet_text}")
+        # Combine all texts into a single paragraph
+        combined_text = ' '.join(all_texts)
+        logger.info(f"Combined text length: {len(combined_text)}")
         
-        return tweet_text
+        return combined_text
     except requests.RequestException as e:
         logger.error(f"Error fetching tweet {tweet_id}: {str(e)}")
         return ''
@@ -55,7 +64,7 @@ def summarize_text(text: str) -> str:
     """Use Gemini to summarize the given text."""
     if not text:
         return "No text to summarize."
-    prompt = f"Summarize the following Twitter content in a concise paragraph:\n\n{text}"
+    prompt = f"Summarize the following Twitter thread in a concise paragraph:\n\n{text}"
     try:
         response = model.generate_content(prompt)
         return response.text
@@ -75,26 +84,24 @@ def lambda_handler(event: Dict, context: Dict) -> Dict:
         tweet_id = tweet_url.split('/')[-1]
         logger.info(f"Extracted tweet ID: {tweet_id}")
         
-        # Get tweet text
-        tweet_text = get_tweet_text(tweet_id)
+        # Get combined tweet texts
+        combined_text = get_tweet_texts(tweet_id)
         
-        if not tweet_text:
+        if not combined_text:
             return {
                 'statusCode': 404,
-                'body': json.dumps({'error': 'Unable to fetch the tweet text. It may not exist or be private.'}),
+                'body': json.dumps({'error': 'Unable to fetch any tweet texts. The tweet may not exist or be private.'}),
                 'headers': {'Content-Type': 'application/json'}
             }
         
-        logger.info(f"Tweet text length: {len(tweet_text)}")
-        
         # Summarize the text using Gemini
-        summary = summarize_text(tweet_text)
+        summary = summarize_text(combined_text)
         
         return {
             'statusCode': 200,
             'body': json.dumps({
                 'summary': summary,
-                'tweet_text': tweet_text  # Including original text for reference
+                'combined_text': combined_text  # Including original combined text for reference
             }),
             'headers': {'Content-Type': 'application/json'}
         }
