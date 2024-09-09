@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiClient {
-  static const String _baseUrl = 'YOUR_API_GATEWAY_URL';
+  static const String _baseUrl = 'https://qzry3wuxnk.execute-api.eu-north-1.amazonaws.com/';
 
   static Future<Map<String, dynamic>> summarizeThread(String url) async {
     final response = await http.post(
