@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         summarizeBtn.textContent = 'Summarizing...';
 
         try {
-            const response = await fetch('YOUR_API_GATEWAY_URL', {
+            const response = await fetch('https://qzry3wuxnk.execute-api.eu-north-1.amazonaws.com/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
