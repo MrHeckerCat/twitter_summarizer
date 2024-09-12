@@ -1,7 +1,12 @@
+name: twitter_thread_summarizer
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: '^3.3.0'
+
 dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.3
-environment:
-  sdk: '^3.3.0'
-
