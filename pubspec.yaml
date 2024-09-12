@@ -2,4 +2,6 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.3
-  sdk: ^3.3.0
+environment:
+  sdk: '^3.3.0'
+
