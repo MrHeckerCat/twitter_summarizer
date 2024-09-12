@@ -19,22 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
         summarizeBtn.textContent = 'Summarizing...';
 
         try {
-            const response = await fetch('https://qzry3wuxnk.execute-api.eu-north-1.amazonaws.com/', {
+            const response = await fetch('https://qzry3wuxnk.execute-api.eu-north-1.amazonaws.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ tweet_url: url }),
+                mode: 'cors'
             });
 
             if (!response.ok) {
-                throw new Error('Failed to summarize thread');
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
             summaryText.textContent = data.summary;
             combinedText.textContent = data.combined_text;
         } catch (error) {
+            console.error('Error:', error);
             alert('Error: ' + error.message);
         } finally {
             summarizeBtn.disabled = false;
