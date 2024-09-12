@@ -1,4 +1,4 @@
-name: twitter_thread_summarizer
+name: twitter_summarizer
 description: A new Flutter project.
 
 version: 1.0.0+1
@@ -10,3 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.3
+  
+  twitter_summarizer:
+    git:
+      url: https://github.com/your-username/twitter_summarizer.git
+      ref: main  
