@@ -10,8 +10,3 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.3
-  
-  twitter_summarizer:
-    git:
-      url: https://github.com/your-username/twitter_summarizer.git
-      ref: main  
