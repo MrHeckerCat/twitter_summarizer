@@ -4,80 +4,127 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
-    width: 80%;
+    width: 90%;
+    max-width: 1200px;
     margin: auto;
     overflow: hidden;
     padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #1da1f2;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
 }
 
 h1 {
-    color: #333;
-    text-align: center;
+    margin: 0;
+}
+
+main {
+    flex-grow: 1;
 }
 
 .input-section {
-    margin-bottom: 20px;
+    display: flex;
+    margin-bottom: 2rem;
 }
 
 input[type="text"] {
-    width: 70%;
+    flex-grow: 1;
     padding: 10px;
-    margin-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
 }
 
 button {
-    padding: 10px 15px;
-    background-color: #333;
-    color: #fff;
+    padding: 10px 20px;
+    background-color: #1da1f2;
+    color: white;
     border: none;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #0c85d0;
+}
+
+#summarizeBtn {
+    border-radius: 0 4px 4px 0;
 }
 
 .output-section {
     display: flex;
-    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .summary-box, .combined-text-box {
-    width: 48%;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 h2 {
-    color: #333;
-}
-
-p {
-    margin-bottom: 15px;
+    color: #1da1f2;
+    margin-top: 0;
 }
 
 .copy-btn {
     display: block;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 1rem;
+    border-radius: 4px;
+}
+
+.content-box {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
 }
 
 @media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
-    
     .output-section {
         flex-direction: column;
     }
     
     .summary-box, .combined-text-box {
         width: 100%;
-        margin-bottom: 20px;
+    }
+    
+    .input-section {
+        flex-direction: column;
+    }
+    
+    input[type="text"], #summarizeBtn {
+        width: 100%;
+        border-radius: 4px;
+        margin-bottom: 1rem;
     }
 }
