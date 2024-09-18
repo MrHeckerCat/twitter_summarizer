@@ -64,6 +64,7 @@ button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    text-align: center;
 }
 
 button:hover {
@@ -86,11 +87,13 @@ button:hover {
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 h2 {
     color: #14171a;
     margin-top: 0;
+    text-align: center;
 }
 
 .output-text {
@@ -99,6 +102,7 @@ h2 {
     min-height: 100px;
     margin-bottom: 10px;
     border-radius: 4px;
+    text-align: left;
 }
 
 .copy-btn {
