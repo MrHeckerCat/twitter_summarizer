@@ -23,6 +23,8 @@ h1 {
     margin: 0;
     font-size: 1.5rem;
     color: #14171a;
+    text-align: center;
+    width: 100%;
 }
 
 .menu-btn {
@@ -32,6 +34,7 @@ h1 {
     cursor: pointer;
     position: absolute;
     left: 20px;
+    z-index: 10;
 }
 
 main {
@@ -129,6 +132,22 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-left: 60px; /* Make room for the menu button */
+    }
+
+    h1 {
+        font-size: 1.2rem;
+        width: calc(100% - 40px); /* Adjust width to avoid overlap */
+    }
+
+    .menu-btn {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
     .output-section {
         flex-direction: column;
     }
@@ -149,5 +168,12 @@ footer {
     
     #summarizeBtn {
         margin-bottom: 0;
+    }
+
+    .copy-btn {
+        width: auto;
+        min-width: 200px;
+        margin: 0 auto;
+        display: block;
     }
 }
