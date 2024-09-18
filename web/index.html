@@ -8,23 +8,37 @@
 </head>
 <body>
     <div class="container">
-        <h1>Twitter Thread Summarizer</h1>
-        <div class="input-section">
-            <input type="text" id="tweetUrl" placeholder="Enter Twitter Thread URL">
-            <button id="summarizeBtn">Summarize</button>
-        </div>
-        <div class="output-section">
-            <div class="summary-box">
-                <h2>Summary</h2>
-                <p id="summaryText"></p>
-                <button class="copy-btn" data-target="summaryText">Copy Summary</button>
+        <header>
+            <h1>Twitter Thread Summarizer</h1>
+        </header>
+        
+        <main>
+            <div class="input-section">
+                <input type="text" id="tweetUrl" placeholder="Enter Twitter Thread URL">
+                <button id="summarizeBtn">Summarize</button>
             </div>
-            <div class="combined-text-box">
-                <h2>Combined Text</h2>
-                <p id="combinedText"></p>
-                <button class="copy-btn" data-target="combinedText">Copy Combined Text</button>
+            
+            <div class="output-section">
+                <div class="summary-box">
+                    <h2>Summary</h2>
+                    <p id="summaryText"></p>
+                    <button class="copy-btn" data-target="summaryText">Copy Summary</button>
+                </div>
+                <div class="combined-text-box">
+                    <h2>Combined Text</h2>
+                    <p id="combinedText"></p>
+                    <button class="copy-btn" data-target="combinedText">Copy Combined Text</button>
+                </div>
             </div>
-        </div>
+            
+            <div class="content-box">
+                <p>Additional content or features can be added here.</p>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 Twitter Thread Summarizer. All rights reserved.</p>
+        </footer>
     </div>
     <script src="script.js"></script>
 </body>
