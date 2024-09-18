@@ -3,55 +3,62 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    overflow: hidden;
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    background-color: #f8f9fa;
 }
 
 header {
-    background-color: #1da1f2;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-bottom: 2rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e1e8ed;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 h1 {
     margin: 0;
+    font-size: 1.5rem;
+    color: #14171a;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
 }
 
 main {
     flex-grow: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .input-section {
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
 }
 
 input[type="text"] {
     flex-grow: 1;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid #e1e8ed;
     border-radius: 4px 0 0 4px;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #1da1f2;
+    background-color: #000000;
     color: white;
     border: none;
     cursor: pointer;
@@ -60,7 +67,7 @@ button {
 }
 
 button:hover {
-    background-color: #0c85d0;
+    background-color: #333333;
 }
 
 #summarizeBtn {
@@ -69,43 +76,51 @@ button:hover {
 
 .output-section {
     display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .summary-box, .combined-text-box {
     flex: 1;
     background-color: white;
-    padding: 1rem;
+    padding: 20px;
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 h2 {
-    color: #1da1f2;
+    color: #14171a;
     margin-top: 0;
 }
 
+.output-text {
+    background-color: #f1f3f5;
+    padding: 10px;
+    min-height: 100px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
 .copy-btn {
-    display: block;
     width: 100%;
-    margin-top: 1rem;
     border-radius: 4px;
 }
 
 .content-box {
     background-color: white;
-    padding: 1rem;
+    padding: 20px;
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin: 0 auto 20px;
+    max-width: 600px;
+    text-align: center;
 }
 
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #ffffff;
+    border-top: 1px solid #e1e8ed;
     text-align: center;
-    padding: 1rem;
+    padding: 10px;
     margin-top: auto;
 }
 
@@ -125,6 +140,10 @@ footer {
     input[type="text"], #summarizeBtn {
         width: 100%;
         border-radius: 4px;
-        margin-bottom: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    #summarizeBtn {
+        margin-bottom: 0;
     }
 }
