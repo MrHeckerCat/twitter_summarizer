@@ -5,41 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitter Thread Summarizer</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Twitter Thread Summarizer</h1>
-        </header>
+    <header>
+        <button id="menuBtn" class="menu-btn"><i class="fas fa-bars"></i></button>
+        <h1>Twitter Thread Summarizer</h1>
+    </header>
+    
+    <main>
+        <div class="input-section">
+            <input type="text" id="tweetUrl" placeholder="Enter Twitter Thread URL">
+            <button id="summarizeBtn">Summarize</button>
+        </div>
         
-        <main>
-            <div class="input-section">
-                <input type="text" id="tweetUrl" placeholder="Enter Twitter Thread URL">
-                <button id="summarizeBtn">Summarize</button>
+        <div class="output-section">
+            <div class="summary-box">
+                <h2>Summary</h2>
+                <div id="summaryText" class="output-text"></div>
+                <button class="copy-btn" data-target="summaryText">Copy Summary</button>
             </div>
-            
-            <div class="output-section">
-                <div class="summary-box">
-                    <h2>Summary</h2>
-                    <p id="summaryText"></p>
-                    <button class="copy-btn" data-target="summaryText">Copy Summary</button>
-                </div>
-                <div class="combined-text-box">
-                    <h2>Combined Text</h2>
-                    <p id="combinedText"></p>
-                    <button class="copy-btn" data-target="combinedText">Copy Combined Text</button>
-                </div>
+            <div class="combined-text-box">
+                <h2>Combined Text</h2>
+                <div id="combinedText" class="output-text"></div>
+                <button class="copy-btn" data-target="combinedText">Copy Combined Text</button>
             </div>
-            
-            <div class="content-box">
-                <p>Additional content or features can be added here.</p>
-            </div>
-        </main>
+        </div>
         
-        <footer>
-            <p>&copy; 2024 Twitter Thread Summarizer. All rights reserved.</p>
-        </footer>
-    </div>
+        <div class="content-box">
+            <p>Additional content or features can be added here.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Twitter Thread Summarizer</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
