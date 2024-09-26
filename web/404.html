@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | TwitSummary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .home-button {
+            background-color: #000;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .home-button:hover {
+            background-color: #333;
+        }
+        .features {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .features h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+        .features li {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+        .features li::before {
+            content: "•";
+            color: #000;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404 - Tweet Not Found</h1>
+        <p>Oops! The tweet you're looking for has flown away.</p>
+        <a href="https://twitsummary.com/" class="home-button">Return to Home</a>
+        
+        <div class="features">
+            <h2>Why Choose TwitSummary?</h2>
+            <ul>
+                <li>Quick and accurate summarization of Twitter threads</li>
+                <li>Easy-to-use interface – just paste the thread URL</li>
+                <li>Get key insights without reading entire threads</li>
+                <li>Save time and increase productivity</li>
+                <li>Free to use – no sign-up required</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
